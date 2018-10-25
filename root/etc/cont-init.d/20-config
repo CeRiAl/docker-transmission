@@ -1,0 +1,25 @@
+#!/usr/bin/with-contenv bash
+
+# make folders
+mkdir -p \
+  "${CONFIG_PATH}" \
+  "${DOWNLOADS_PATH}"/{complete,incomplete} \
+  "${WATCH_PATH}"
+
+# copy default config
+[[ ! -f "${CONFIG_PATH}"/settings.json ]] && \
+  cp /defaults/settings.json "${CONFIG_PATH}"/settings.json
+
+# copy blocklist-update script
+[[ ! -f "${CONFIG_PATH}"/blocklist-update.sh ]] && \
+  cp /defaults/blocklist-update.sh "${CONFIG_PATH}"/blocklist-update.sh
+
+# set permissions
+chown abc:abc \
+  "${CONFIG_PATH}" \
+  "${CONFIG_PATH}"/{settings.json,blocklist-update.sh} \
+  "${DOWNLOADS_PATH}" \
+  "${DOWNLOADS_PATH}"/{complete,incomplete} \
+  "${WATCH_PATH}"
+
+chmod 755 "${CONFIG_PATH}"/blocklist-update.sh
