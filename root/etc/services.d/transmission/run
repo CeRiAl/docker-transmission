@@ -1,9 +1,8 @@
 #!/usr/bin/with-contenv bash
 
 exec s6-setuidgid abc \
-  /usr/bin/transmission-daemon \
+  /usr/bin/transmission-daemon --foreground \
     --config-dir "${CONFIG_PATH}" \
-    --incomplete-dir "${DOWNLOADS_PATH}"/incomplete \
-    --download-dir "${DOWNLOADS_PATH}"/complete \
-    -c "${WATCH_PATH}" \
-    -f
+    --incomplete-dir "${DOWNLOADS_PATH}/incomplete" \
+    --download-dir "${DOWNLOADS_PATH}/complete" \
+    --watch-dir "${WATCH_PATH}"
