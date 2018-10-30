@@ -1,11 +1,8 @@
 #!/bin/bash
 set -e  # Exit on error
 
-BUILD_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-
 docker build \
-  --build-arg VERSION="${CACHE_TAG}" \
-  --build-arg REVISION="${SOURCE_COMMIT}" \
-  --build-arg BUILD_DATE="${BUILD_DATE}" \
-  -f ${DOCKERFILE_PATH} \
-  -t ${IMAGE_NAME} .
+  --build-arg VERSION=$CACHE_TAG \
+  --build-arg REVISION=$SOURCE_COMMIT \
+  -f $DOCKERFILE_PATH \
+  -t $IMAGE_NAME .
