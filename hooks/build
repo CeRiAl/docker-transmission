@@ -1,6 +1,14 @@
 #!/bin/bash
 set -e  # Exit on error
 
+echo "=========================="
+echo "ENV"
+env
+echo "=========================="
+echo "EXPORT"
+export
+echo "=========================="
+
 BUILD_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
 docker build \
