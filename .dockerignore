@@ -3,7 +3,7 @@
 .gitignore
 .idea
 hooks
-build.sh
+build-local.sh
 LICENSE
 README.md
 VERSION
