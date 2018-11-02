@@ -1,18 +1,18 @@
 #!/bin/bash
 set -e  # Exit on error
 
-echo "=========================="
-echo "ENV"
-env
-echo "=========================="
-echo "EXPORT"
-export
-echo "=========================="
-
+IMAGE_NAME="${IMAGE_NAME}"
+VERSION="${DOCKER_TAG}"
+REVISION="${GIT_SHA1:0:7}"
 BUILD_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
+echo -e "NAME:\t\t${IMAGE_NAME}"
+echo -e "VERSION:\t${VERSION}"
+echo -e "REVISION:\t${REVISION}"
+echo -e "BUILD_DATE:\t${BUILD_DATE}"
+
 docker build \
-  --build-arg VERSION=$CACHE_TAG \
-  --build-arg REVISION=$SOURCE_COMMIT \
+  --build-arg VERSION="$VERSION" \
+  --build-arg REVISION="$REVISION" \
   --build-arg BUILD_DATE="$BUILD_DATE" \
-  -t $IMAGE_NAME .
+  --tag "$IMAGE_NAME" .
