@@ -1,5 +1,14 @@
 #!/bin/bash
 set -e  # Exit on error
 
-docker tag ${IMAGE_NAME} ${DOCKER_REPO}:latest
-docker push ${DOCKER_REPO}:latest
+# environment variables from Docker Cloud build-server
+DOCKER_REPO="${DOCKER_REPO}"    # e.g. "index.docker.io/cryptopath/transmission"
+DOCKER_TAG="${DOCKER_TAG}"      # e.g. "0.1.0" or "master"
+
+# tag image with 'latest'
+docker tag ${DOCKER_REPO}:${DOCKER_TAG} ${DOCKER_REPO}:latest
+
+# don't push image if '--no-push' was specified
+if [ "$1" != "--no-push" ]; then
+  docker push ${DOCKER_REPO}:latest
+fi
